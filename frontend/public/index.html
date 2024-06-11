@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Białoruskie Dania</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="register">
+    <h2>Register</h2>
+    <label for="reg-username"></label><input type="text" id="reg-username" placeholder="Username">
+    <label for="reg-password"></label><input type="password" id="reg-password" placeholder="Password">
+    <button onclick="register()">Register</button>
+</div>
+<div id="login">
+    <h2>Login</h2>
+    <label for="login-username"></label><input type="text" id="login-username" placeholder="Username">
+    <label for="login-password"></label><input type="password" id="login-password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+<script>
+    async function register() {
+        const username = document.getElementById('reg-username').value;
+        const password = document.getElementById('reg-password').value;
+        const response = await fetch('/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        if (response.ok) {
+            alert('User registered');
+        } else {
+            alert('Error registering user');
+        }
+    }
+
+    async function login() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+        const response = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            alert('User logged in');
+        } else {
+            alert('Invalid credentials');
+        }
+    }
+</script>
+
+<header>
+    <nav id="navigation">
+        <ul>
+            <li><a href="/" data-page="home">Home</a></li>
+            <li><a href="/about" data-page="about">History</a></li>
+            <li><a href="/recipes" data-page="recipes">Recipes</a></li>
+            <li><a href="/contact" data-page="contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+    <div id="root"></div> <!-- Kontener dla aplikacji React -->
+</main>
+<footer>
+    <p>&copy; 2024 Białoruskie Dania. Lizaveta Khudalei</p>
+</footer>
+
+<script>
+    // AJAX function to load content into the main section
+    function loadContent(page) {
+        $("#content").load(page + ".html", function(response, status) {
+            if (status === "error") {
+                $("#content").html("<p>Sorry, the content could not be loaded.</p>");
+            }
+        });
+    }
+
+    // Event listener for navigation links
+    $(document).ready(function() {
+        $("#navigation a").click(function(event) {
+            event.preventDefault();
+            var page = $(this).data("page");
+            loadContent(page);
+        });
+
+        // Load default page
+        loadContent("home");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Białoruskie Dania</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<main id="content">
+    <div id="recipes-list">
+        <h1>Najpopularniejsze Dania Białoruskie</h1>
+        <ul>
+            <li><a href="#" class="recipe-link" data-recipe="draniki">Draniki (Śniadanie)</a></li>
+            <li><a href="#" class="recipe-link" data-recipe="borscht">Barszcz (Obiad)</a></li>
+            <li><a href="#" class="recipe-link" data-recipe="machanka">Machanka (Kolacja)</a></li>
+        </ul>
+    </div>
+
+    <div id="recipe-draniki" class="recipe-content">
+        <h1>Draniki (Śniadanie)</h1>
+        <img src="draniki.jpeg"  width="600" height="400">
+        <p>Draniki są tradycyjnym białoruskim daniem z tartych ziemniaków. Są to placki ziemniaczane, które są smażone na złoty kolor.</p>
+        <h2>Składniki:</h2>
+        <ul>
+            <li>1 kg ziemniaków</li>
+            <li>1 cebula</li>
+            <li>1 jajko</li>
+            <li>2 łyżki mąki</li>
+            <li>Sól i pieprz do smaku</li>
+            <li>Olej do smażenia</li>
+        </ul>
+        <h2>Przygotowanie:</h2>
+        <ol>
+            <li>Obierz i zetrzyj ziemniaki oraz cebulę na tarce.</li>
+            <li>Odcedź nadmiar płynu.</li>
+            <li>Dodaj jajko, mąkę, sól i pieprz, dobrze wymieszaj.</li>
+            <li>Smaż placki na rozgrzanym oleju, aż będą złociste z obu stron.</li>
+        </ol>
+    </div>
+
+    <div id="recipe-borscht" class="recipe-content">
+        <h1>Barszcz (Obiad)</h1>
+        <img src="borsh.jpeg"  width="600" height="400">
+        <p>Barszcz to tradycyjna białoruska zupa z buraków, która jest popularna w wielu krajach Europy Wschodniej.</p>
+        <h2>Składniki:</h2>
+        <ul>
+            <li>500 g buraków</li>
+            <li>2 marchewki</li>
+            <li>1 cebula</li>
+            <li>2 ziemniaki</li>
+            <li>1/4 główki kapusty</li>
+            <li>2 litry bulionu</li>
+            <li>3 łyżki koncentratu pomidorowego</li>
+            <li>Sól, pieprz, liść laurowy</li>
+            <li>Kwaśna śmietana do podania</li>
+        </ul>
+        <h2>Przygotowanie:</h2>
+        <ol>
+            <li>Obierz i pokrój warzywa w kostkę.</li>
+            <li>W dużym garnku podsmaż cebulę, marchew i buraki.</li>
+            <li>Dodaj ziemniaki, kapustę, bulion i przyprawy.</li>
+            <li>Gotuj na wolnym ogniu przez około 1 godzinę.</li>
+            <li>Dodaj koncentrat pomidorowy i gotuj przez kolejne 10 minut.</li>
+            <li>Podawaj z kwaśną śmietaną.</li>
+        </ol>
+    </div>
+
+    <div id="recipe-machanka" class="recipe-content">
+        <h1>Machanka (Kolacja)</h1>
+        <img src="machanka.jpeg"  width="600" height="400">
+        <p>Machanka to tradycyjna białoruska potrawa mięsna, często podawana z naleśnikami lub plackami ziemniaczanymi.</p>
+        <h2>Składniki:</h2>
+        <ul>
+            <li>500 g wieprzowiny</li>
+            <li>2 cebule</li>
+            <li>2 ząbki czosnku</li>
+            <li>1 szklanka śmietany</li>
+            <li>1 łyżka mąki</li>
+            <li>Sól, pieprz, liść laurowy</li>
+            <li>Olej do smażenia</li>
+        </ul>
+        <h2>Przygotowanie:</h2>
+        <ol>
+            <li>Pokrój wieprzowinę w kostkę i podsmaż na oleju.</li>
+            <li>Dodaj pokrojoną cebulę i czosnek, smaż aż zmiękną.</li>
+            <li>Dodaj mąkę i smaż przez 1 minutę, następnie dodaj śmietanę i przyprawy.</li>
+            <li>Gotuj na wolnym ogniu przez 20-30 minut, aż mięso będzie miękkie.</li>
+            <li>Podawaj z naleśnikami lub plackami ziemniaczanymi.</li>
+        </ol>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 Białoruskie Dania. All rights reserved.</p>
+</footer>
+
+<script>
+    // Function to show the selected recipe and hide others
+    function showRecipe(recipeId) {
+        $('.recipe-content').hide();
+        $('#recipe-' + recipeId).show();
+    }
+
+    // Event listener for recipe links
+    $(document).ready(function() {
+        $(".recipe-link").click(function(event) {
+            event.preventDefault();
+            var recipe = $(this).data("recipe");
+            showRecipe(recipe);
+        });
+
+        // Initially hide all recipes
+        $('.recipe-content').hide();
+    });
+</script>
+</body>
+</html>
